@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control Panel</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-dark text-white">
+
+    <h1>Control Panel</h1>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Folder</th>
+                <th>Filename</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>API Tokens Used</th>
+                <th>Token Cost</th>
+                <th>Image 1</th>
+                <th>Image 2</th>
+                <th>Image 3</th>
+                <th>Mid Prompt</th>
+                <th>Done Image</th>
+                <th>Uploaded</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task['title'] }}</td>
+                <td>{{ task['folder'] }}</td>
+                <td>{{ task['filename'] }}</td>
+                <td>{{ task['start_time'] }}</td>
+                <td>{{ task['end_time'] }}</td>
+                <td>{{ task['api_tokens_used'] }}</td>
+                <td>{{ task['token_cost'] }}</td>
+                <td>{{ task['img1'] }}</td>
+                <td>{{ task['img2'] }}</td>
+                <td>{{ task['img3'] }}</td>
+                <td>{{ task['midPrompt'] }}</td>
+                <td>{{ task['doneImg'] }}</td>
+                <td>{{ task['uploaded'] }}</td>
+                <td>
+                    <form action="/delete_task" method="post">
+                        <input type="hidden" name="title" value="{{ task['title'] }}">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
